@@ -1,0 +1,47 @@
+<!doctype html>
+<html data-theme="charcoal" data-theme-mode="charcoal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111417" />
+    <meta name="background-color" content="#111417" />
+    <title>Restaurant Finder and Planner</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        background: #111417;
+      }
+      html, body, #root {
+        min-height: 100%;
+        background: #111417;
+      }
+      body {
+        margin: 0;
+      }
+    </style>
+    <script>
+      (function () {
+        var themeKey = "restaurant-finder-theme";
+        var fallbackTheme = "charcoal";
+        var validThemes = { charcoal: true, orange: true };
+        var theme = fallbackTheme;
+        try {
+          var savedTheme = window.localStorage && window.localStorage.getItem(themeKey);
+          theme = validThemes[savedTheme] ? savedTheme : fallbackTheme;
+          if (savedTheme && !validThemes[savedTheme]) {
+            window.localStorage.setItem(themeKey, fallbackTheme);
+          }
+        } catch (error) {
+          theme = fallbackTheme;
+        }
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.themeMode = theme;
+      })();
+    </script>
+    <link rel="manifest" href="/manifest.webmanifest" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
